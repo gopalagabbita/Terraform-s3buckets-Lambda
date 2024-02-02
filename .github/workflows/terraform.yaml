@@ -1,17 +1,9 @@
-name: "Listing S3buckets Via Lambda with GitHub Actions"
- 
+name: "Listing S3buckets Via Lambda with GitHub Actions" 
 on:
  push:
    branches:
    - main
-   paths:
-   - terraform/**
- pull_request:
-   branches:
-   - main
-   paths:
-   - terraform/**
- 
+
 env:
  # Credentials for deployment to AWS
  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
