@@ -13,11 +13,6 @@ jobs:
  terraform:
    name: "Terraform Infrastructure Change Management"
    runs-on: ubuntu-latest
-   defaults:
-     run:
-       shell: bash
-       # We keep Terraform files in the terraform directory.
-       working-directory: ./terraform
  
    steps:
      - name: Checkout the repository to the runner
@@ -27,11 +22,21 @@ jobs:
        uses: hashicorp/setup-terraform@v2
        with:
          terraform_version: 1.6.6
-    
+
+     - name: Setup Python
+       uses: actions/setup-python@v2
+       with:
+        python-version: '3.x'
+
+     - name: Install dependencies
+       run: |
+         pip install boto3
+         pip install awscli
+
      - name: Terraform init
        id: init
        run: terraform init
- 
+
      - name: Terraform format
        id: fmt
        run: terraform fmt -check
@@ -42,12 +47,10 @@ jobs:
  
      - name: Terraform plan
        id: plan
-       if: github.event_name == 'pull_request'
        run: terraform plan -no-color -input=false
        continue-on-error: true
     
      - uses: actions/github-script@v6
-       if: github.event_name == 'pull_request'
        env:
          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
        with:
