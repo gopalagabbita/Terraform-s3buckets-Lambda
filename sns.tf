@@ -1,6 +1,6 @@
 resource "aws_sns_topic" "my-sns-topic" {
-    name = "Test"
-    policy = <<POLICY
+  name   = "Test"
+  policy = <<POLICY
 {
     "Version":"2012-10-17",
     "Statement":[{

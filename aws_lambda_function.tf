@@ -17,9 +17,9 @@ resource "aws_s3_bucket_notification" "aws-lambda-trigger" {
 }
 
 resource "aws_lambda_permission" "allow_terraform_bucket" {
-   statement_id = "AllowExecutionFromS3Bucket"
-   action = "lambda:InvokeFunction"
-   function_name = "${aws_lambda_function.s3_copy_function.arn}"
-   principal = "s3.amazonaws.com"
-   source_arn = "${aws_s3_bucket.source_bucket.arn}"
+  statement_id  = "AllowExecutionFromS3Bucket"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.s3_copy_function.arn
+  principal     = "s3.amazonaws.com"
+  source_arn    = aws_s3_bucket.source_bucket.arn
 }
