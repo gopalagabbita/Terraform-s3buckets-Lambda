@@ -1,16 +1,16 @@
 variable iam_role_name {
   type = string
-  default = "lambda_list_buckets_role"
+  default = "ggabbita-test-list-buckets-role"
 }
 
 variable lambda_name {
   type = string
-  default = "list_buckets_lambda"
+  default = "ggabbita-test-s3buckets-lambda"
 }
 
 variable output_bucket_name {
   type = string
-  default = "lambda_list_buckets_role"
+  default = "test-s3buckets-lambda-ggabbita"
 }
 
 variable environment {
