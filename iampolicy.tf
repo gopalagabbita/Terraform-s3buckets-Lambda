@@ -28,17 +28,17 @@ resource "aws_lambda_function" "list_buckets_lambda" {
     }
   }
   tags = {
-    Name        = "ListBucketsLambda"
+    Name        = "${var.lambda_name}"
     Environment = "${var.environment}"
   }
 }
 
 resource "aws_cloudwatch_log_group" "lambda_log_group" {
-  name              = "/aws/lambda/${aws_lambda_function.list_buckets_lambda.function_name}"
-  retention_in_days = 7
+  name              = var.lambda_log_group
+  retention_in_days = var.retention_in_days
 
   tags = {
-    Name        = "ListBucketsLambdaLogs"
+    Name        = "${var.lambda_name}_log_group"
     Environment = "${var.environment}"
   }
 }

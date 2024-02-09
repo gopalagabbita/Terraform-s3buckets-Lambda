@@ -9,7 +9,7 @@ data "aws_iam_policy_document" "lambda_assume_role_policy" {
 }
 
 resource "aws_iam_role" "lambda_role" {
-  name               = "terraform-lambda-s3-ggabbita"
+  name               = var.iam_role_name
   assume_role_policy = <<EOF
 {
  "Version": "2012-10-17",
@@ -30,13 +30,20 @@ EOF
 data "aws_iam_policy_document" "lambda_policy" {
   statement {
     actions = [
-      "s3:ListAllMyBuckets",
-      "s3:ListBucket",
       "s3:PutObject"
     ]
     resources = [
-      "arn:aws:s3:::*",                          # Allow listing all buckets
-      "arn:aws:s3:::${var.output_bucket_name}/*" # Allow writing to output bucket
+      "${aws_s3_bucket.output_bucket_name.arn}/*"
+    ]
+  }
+  statement {
+    actions = [
+      "s3:ListAllMyBuckets",
+      "s3:ListBucket"
+    ]
+    resources = [
+      "arn:aws:s3:::*",                           # Allow listing all buckets
+      "${aws_s3_bucket.output_bucket_name.arn}/*" # Allow writing to output bucket
     ]
   }
 }

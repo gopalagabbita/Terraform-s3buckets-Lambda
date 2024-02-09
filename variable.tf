@@ -17,3 +17,14 @@ variable "environment" {
   type    = string
   default = "dev"
 }
+
+variable "lambda_log_group" {
+  type    = string
+  default = "/aws/lambda/ggabbita-test-s3buckets-lambda"
+}
+
+variable "retention_in_days" {
+  type    = number
+  default = 7
+
+}
