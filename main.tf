@@ -9,7 +9,7 @@ data "aws_iam_policy_document" "lambda_assume_role_policy" {
 }
 
 resource "aws_iam_role" "lambda_role" {
-  name               = "Lambda_Function_Role"
+  name               = "terraform-lambda-s3-ggabbita"
   assume_role_policy = <<EOF
 {
  "Version": "2012-10-17",
