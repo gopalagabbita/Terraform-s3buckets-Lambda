@@ -1,5 +1,5 @@
 resource "aws_iam_policy" "lambda_policy" {
-  name   = "lambda_list_buckets_policy"
+  name   = "terraform-lambda-s3-ggabbita-policy"
   policy = data.aws_iam_policy_document.lambda_policy.json
 }
 
