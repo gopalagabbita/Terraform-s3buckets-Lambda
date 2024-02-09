@@ -35,8 +35,8 @@ data "aws_iam_policy_document" "lambda_policy" {
       "s3:PutObject"
     ]
     resources = [
-      "arn:aws:s3:::*",  # Allow listing all buckets
-      "arn:aws:s3:::${var.output_bucket_name}/*"  # Allow writing to output bucket
+      "arn:aws:s3:::*",                          # Allow listing all buckets
+      "arn:aws:s3:::${var.output_bucket_name}/*" # Allow writing to output bucket
     ]
   }
 }
