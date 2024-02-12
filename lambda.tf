@@ -1,11 +1,4 @@
 
-
-data "archive_file" "lambda_code" {
-  type        = "zip"
-  source_dir  = "lambda_source_code"
-  output_path = "lambda_function.zip"
-}
-
 resource "aws_lambda_function" "list_buckets_lambda" {
   filename         = "lambda_function.zip"
   function_name    = var.lambda_name
@@ -24,9 +17,13 @@ resource "aws_lambda_function" "list_buckets_lambda" {
     Environment = "${var.environment}"
   }
 }
-
+data "archive_file" "lambda_code" {
+  type        = "zip"
+  source_dir  = "lambda_source_code"
+  output_path = "lambda_function.zip"
+}
 resource "aws_cloudwatch_log_group" "lambda_log_group" {
-  name              = var.lambda_log_group
+  name              = "/aws/lambda/${aws_lambda_function.list_buckets_lambda_name}"
   retention_in_days = var.retention_in_days
 
   tags = {

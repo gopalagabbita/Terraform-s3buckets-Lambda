@@ -1,6 +1,6 @@
 name: "Listing S3buckets Via Lambda with GitHub Actions" 
-on:
- push:
+# on:
+#  push:
    branches:
    - main
 
